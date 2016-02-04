@@ -31,10 +31,12 @@ namespace Webforms2
                 {
                     Label firstNamelabel = new Label { Text = oreader["FirstName"].ToString()};
                     TableCell firstTableCell = new TableCell();
+                    firstTableCell.CssClass = "tdclass";
                     firstTableCell.Controls.Add(firstNamelabel);
 
                     Label lastNamelabel = new Label { Text = oreader["LastName"].ToString() };
                     TableCell lastTableCell = new TableCell();
+                    lastTableCell.CssClass = "tdclass";
                     lastTableCell.Controls.Add(lastNamelabel);
 
                     TableRow row = new TableRow();

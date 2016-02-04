@@ -1,0 +1,9 @@
+﻿body {
+}
+
+td_class {
+    border: 1px solid #cccccc;
+}
+
+tr:nth-child(even) {background: #f8f8f8}
+tr:nth-child(odd) {background: #ffffff}
