@@ -13,6 +13,7 @@ namespace Webforms2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            CategoryDropDown.Visible = false;
         }
 
         protected void runSearch_Click(object sender, EventArgs e)
@@ -28,15 +29,15 @@ namespace Webforms2
                 oreader = cmd.ExecuteReader();
                 foreach (var name in oreader)
                 {
-                    Label firstNamelabel = new Label { Text = oreader["Name"].ToString() };
-                    TableCell firstTableCell = new TableCell();
-                    firstTableCell.CssClass = "tdclass";
-                    firstTableCell.Controls.Add(firstNamelabel);
-
+                    Label namelabel = new Label { Text = oreader["Name"].ToString() };
+                    TableCell tableCell = new TableCell();
+                    tableCell.CssClass = "tdclass";
+                    tableCell.Controls.Add(namelabel);
                     TableRow row = new TableRow();
-                    row.Controls.Add(firstTableCell);
+                    row.Controls.Add(tableCell);
 
-                    nameTable.Controls.Add(row);
+                    CategoryTable.Controls.Add(row);
+                    CategoryDropDown.Items.Add(new ListItem($"{oreader["Name"].ToString()}"));
                 }
                 oreader.Close();
                 oreader.Dispose();
@@ -51,7 +52,8 @@ namespace Webforms2
                 con.Dispose();
                 cmd.Dispose();
             }
-            // Server.TransferRequest(Request.Url.AbsolutePath, false);
+            CategoryDropDown.DataBind();
+            CategoryDropDown.Visible = true;
         }
 
         protected void InsertCategory_Click(object sender, EventArgs e)
@@ -81,8 +83,6 @@ namespace Webforms2
                 sqlConnection.Dispose();
                 sqlCommand.Dispose();
             }
-            //addButton.Visible = false;
-
         }
     }
 }

@@ -67,12 +67,30 @@ namespace Webforms2 {
         protected global::System.Web.UI.WebControls.Button addButton;
         
         /// <summary>
-        /// nameTable control.
+        /// QueryTable control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table nameTable;
+        protected global::System.Web.UI.WebControls.Table QueryTable;
+        
+        /// <summary>
+        /// CategoryTable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table CategoryTable;
+        
+        /// <summary>
+        /// CategoryDropDown control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList CategoryDropDown;
     }
 }

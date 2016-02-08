@@ -25,3 +25,7 @@ div {
 input {
     padding: 5px;
 }
+
+#QueryTable td {
+    vertical-align: top;
+}

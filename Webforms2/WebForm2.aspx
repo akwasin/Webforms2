@@ -20,10 +20,19 @@
             <asp:Button ID="addButton" runat="server" Text="Add Category" OnClick="InsertCategory_Click" />
         </div>
 
-        <div>
-            <asp:Table ID="nameTable" runat="server">
-            </asp:Table>
-        </div>
+        <asp:Table ID="QueryTable" runat="server">
+            <asp:TableRow runat="server">
+                <asp:TableCell runat="server">
+                    <asp:Table ID="CategoryTable" runat="server">
+                    </asp:Table>
+                </asp:TableCell>
+                <asp:TableCell runat="server">
+                    <asp:DropDownList ID="CategoryDropDown" runat="server">
+                    </asp:DropDownList>
+                </asp:TableCell>
+            </asp:TableRow>
+        </asp:Table>
+    
     </form>
 </body>
 </html>
