@@ -1,9 +1,27 @@
 ﻿body {
+    background-color: #ffffff;
 }
 
 td_class {
     border: 1px solid #cccccc;
 }
 
-tr:nth-child(even) {background: #f8f8f8}
-tr:nth-child(odd) {background: #ffffff}
+td {
+    padding: 5px;    
+}
+
+tr:nth-child(even) {
+    background: #f8f8f8
+}
+
+tr:nth-child(odd) {
+    background: #ffffff
+}
+
+div {
+    margin-bottom: 20px;
+}
+
+input {
+    padding: 5px;
+}

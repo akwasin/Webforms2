@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -12,63 +13,14 @@ namespace Webforms2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // LoadPerson();
-        }
-
-        public void LoadPerson()
-        {
-            // Glöm inte att byta uppgifterna på följande rad.
-            SqlConnection con = new SqlConnection("Data Source=localhost;Initial Catalog=AdventureWorks2012;User ID=Akwasi; Password=Root;Integrated Security = True");
-
-            string sqlQueryPerson = "SELECT FirstName, LastName FROM Person.Person";
-            SqlCommand cmd = new SqlCommand(sqlQueryPerson, con);
-            SqlDataReader oreader;
-            try
-            {
-                con.Open();
-                oreader = cmd.ExecuteReader();
-                foreach (var name in oreader)
-                {
-                    Label firstNamelabel = new Label { Text = oreader["FirstName"].ToString()};
-                    TableCell firstTableCell = new TableCell();
-                    firstTableCell.CssClass = "tdclass";
-                    firstTableCell.Controls.Add(firstNamelabel);
-
-                    Label lastNamelabel = new Label { Text = oreader["LastName"].ToString() };
-                    TableCell lastTableCell = new TableCell();
-                    lastTableCell.CssClass = "tdclass";
-                    lastTableCell.Controls.Add(lastNamelabel);
-
-                    TableRow row = new TableRow();
-                    row.Controls.Add(firstTableCell);
-                    row.Controls.Add(lastTableCell);
-
-                    nameTable.Controls.Add(row);
-                }
-                oreader.Close();
-                oreader.Dispose();
-            }
-            catch (Exception ex)
-            {
-                // do error
-            }
-            finally
-            {
-                con.Close();
-                con.Dispose();
-                cmd.Dispose();
-            }
-
         }
 
         protected void runSearch_Click(object sender, EventArgs e)
         {
-            string searchList = this.searchList.SelectedItem.Text;
-            // Glöm inte att byta uppgifterna på följande rad.
-            SqlConnection con = new SqlConnection("Data Source=localhost;Initial Catalog=AdventureWorks2012;User ID=Akwasi; Password=Root;Integrated Security = True");
+            SqlConnection con = new SqlConnection("Data Source=localhost;Initial Catalog=AdventureWorksLT2012;User ID=Akwasi; Password=Root;Integrated Security = True");
 
-            string sqlQueryPerson = $"SELECT {searchList} FROM Person.Person";
-            SqlCommand cmd = new SqlCommand(sqlQueryPerson, con);
+            string sqlQueryCategory = "SELECT * FROM SalesLT.ProductCategory ORDER BY Name ASC";
+            SqlCommand cmd = new SqlCommand(sqlQueryCategory, con);
             SqlDataReader oreader;
             try
             {
@@ -76,7 +28,7 @@ namespace Webforms2
                 oreader = cmd.ExecuteReader();
                 foreach (var name in oreader)
                 {
-                    Label firstNamelabel = new Label { Text = oreader[$"{searchList}"].ToString() };
+                    Label firstNamelabel = new Label { Text = oreader["Name"].ToString() };
                     TableCell firstTableCell = new TableCell();
                     firstTableCell.CssClass = "tdclass";
                     firstTableCell.Controls.Add(firstNamelabel);
@@ -99,52 +51,38 @@ namespace Webforms2
                 con.Dispose();
                 cmd.Dispose();
             }
-
-            //Server.TransferRequest(Request.Url.AbsolutePath, false);
+            // Server.TransferRequest(Request.Url.AbsolutePath, false);
         }
 
-        protected void addPerson_Click(object sender, EventArgs e)
+        protected void InsertCategory_Click(object sender, EventArgs e)
         {
-            string addFirstName = addBoxFirstName.Text;
-            string addLastname = addBoxLastName.Text;
-            SqlConnection con = new SqlConnection("Data Source=localhost;Initial Catalog=AdventureWorks2012;User ID=Akwasi; Password=Root;Integrated Security = True");
+            CategoryLabelBox.Visible = true;
 
-            // HÄR NERE ÄR JAG
-            string sqlQueryPerson = $"SELECT {addFirstName} FROM Person.Person";
-            SqlCommand cmd = new SqlCommand(sqlQueryPerson, con);
-            SqlDataReader oreader;
+            SqlConnection sqlConnection = new SqlConnection("Server=localhost; Database=AdventureWorksLT2012; Integrated Security=true");
+
+            string sqlInsert = $"INSERT INTO SalesLT.ProductCategory (Name) VALUES ('{InsertCategoryTextBox.Text}')";
+            SqlCommand sqlCommand = new SqlCommand(sqlInsert, sqlConnection);
             try
             {
-                con.Open();
-                oreader = cmd.ExecuteReader();
-                foreach (var name in oreader)
+                sqlConnection.Open();
+                if (sqlCommand.ExecuteNonQuery() > 0)
                 {
-                    Label firstNamelabel = new Label { Text = oreader[$"{searchString}"].ToString() };
-                    TableCell firstTableCell = new TableCell();
-                    firstTableCell.CssClass = "tdclass";
-                    firstTableCell.Controls.Add(firstNamelabel);
-
-                    TableRow row = new TableRow();
-                    row.Controls.Add(firstTableCell);
-
-                    nameTable.Controls.Add(row);
+                    CategoryLabelBox.Text = $"{InsertCategoryTextBox.Text} was added to categories. Run query to see all categories.";
+                    addButton.Text = "Add another category";
                 }
-                oreader.Close();
-                oreader.Dispose();
             }
             catch (Exception ex)
             {
-                // do error
+                CategoryLabelBox.Text = ex.Message;
             }
             finally
             {
-                con.Close();
-                con.Dispose();
-                cmd.Dispose();
+                sqlConnection.Close();
+                sqlConnection.Dispose();
+                sqlCommand.Dispose();
             }
+            //addButton.Visible = false;
 
-            //Server.TransferRequest(Request.Url.AbsolutePath, false);
         }
-
     }
 }

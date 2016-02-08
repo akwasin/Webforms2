@@ -10,20 +10,17 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:DropDownList ID="searchList" runat="server">
-                <asp:ListItem Value="">(Select Searchstring)</asp:ListItem>
-                <asp:ListItem>FirstName</asp:ListItem>
-                <asp:ListItem>LastName</asp:ListItem>
-                <asp:ListItem>MiddleName</asp:ListItem>
-            </asp:DropDownList>
-
+            <asp:Label ID="RunQueryLabel" runat="server">Press 'Run Query' to view all categories</asp:Label>
             <asp:Button ID="runSearch" runat="server" Text="Run Query" OnClick="runSearch_Click" />
-            
-            <asp:TextBox ID="addBoxFirstName" runat="server"></asp:TextBox>
-            <asp:TextBox ID="addBoxLastName" runat="server"></asp:TextBox>
-            
-            <asp:Button ID="addButton" runat="server" Text="Add Person" OnClick="addPerson_Click" />
-            
+        </div>
+
+        <div>
+            <asp:TextBox ID="InsertCategoryTextBox" runat="server"></asp:TextBox>
+            <asp:Label ID="CategoryLabelBox" runat="server"></asp:Label>
+            <asp:Button ID="addButton" runat="server" Text="Add Category" OnClick="InsertCategory_Click" />
+        </div>
+
+        <div>
             <asp:Table ID="nameTable" runat="server">
             </asp:Table>
         </div>
